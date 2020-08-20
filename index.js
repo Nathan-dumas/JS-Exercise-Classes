@@ -59,6 +59,8 @@ class Person {
   }
 }
 
+const nathan = new Person("Nathan", 25);
+
 /*
   TASK 2
     - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments.
@@ -107,12 +109,12 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-  constructor(attrs){
+  constructor(attrs) {
     this.name = attrs.name;
     this.age = attrs.age;
     this.location = attrs.location;
   }
-  speak(){
+  speak() {
     return `Hello my name is ${this.name}, I am from ${this.location}`
   }
 }
@@ -131,10 +133,28 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
+class Instructor extends Lambdasian {
+  constructor(attributes) {
+    super(attributes);
+    this.specialty = attributes.specialty;
+    this.favLanguage = attributes.favLanguage;
+    this.catchPhrase = attributes.catchPhrase;
+  }
+  demo(subject) {
+    return `Today we are learning about ${subject}`;
+  }
+  grade(student, subject) {
+    return `${student.name} receives a perfect score on ${subject}`;
+  }
+  gradeTwo(student){
+    student.grade = student.grade + (Math.round(Math.random()) * 2 - 1);
+  }
+};
 
-}
-
+const instructorOne = new Instructor({
+  name: 'Joe',
+  age: 50,
+})
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -150,9 +170,42 @@ class Instructor {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
-
+class Student extends Lambdasian {
+  constructor(attrs) {
+    super(attrs);
+    this.previousBackground = attrs.previousBackground;
+    this.className = attrs.className;
+    this.favSubjects = attrs.favSubjects;
+    this.grade = attrs.grade;
+  }
+  listSubjects() {
+    return `Loving ${this.favSubjects}`;
+  }
+  PRAssignment(subject) {
+    return `${this.name} has submitted a PR for ${subject}`;
+  }
+  sprintChallenge(subject) {
+    return `${this.name} has begun sprint challenge on ${subject}`
+  }
+  graduate(){
+    if(this.grade >= 70){
+      return "You graduate!";
+    }else{
+      return "You flex this unit!"
+    }
+  }
 }
+
+const studentOne = new Student({
+  name: 'Nathan',
+  age: 25,
+  grade: 70,
+});
+
+console.log(instructorOne);
+console.log(studentOne);
+instructorOne.gradeTwo(studentOne)
+console.log(studentOne.graduate())
 
 /*
   TASK 6
@@ -167,8 +220,18 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-
+class ProjectManager extends Instructor {
+  constructor(attrs) {
+    super(attrs);
+    this.gradClassName = attrs.gradClassName;
+    this.favInstructor = attrs.favInstructor;
+  }
+  standUp(channel) {
+    return `${this.name} announces to ${channel}, @channel standy times!`;
+  }
+  debugsCode(student, subject) {
+    return `${this.name} debugs ${student.name}'s code on ${subject}`
+  }
 }
 
 /*
