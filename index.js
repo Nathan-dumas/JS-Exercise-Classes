@@ -202,10 +202,10 @@ const studentOne = new Student({
   grade: 70,
 });
 
-console.log(instructorOne);
-console.log(studentOne);
-instructorOne.gradeTwo(studentOne)
-console.log(studentOne.graduate())
+// console.log(instructorOne);
+// console.log(studentOne);
+// instructorOne.gradeTwo(studentOne)
+// console.log(studentOne.graduate())
 
 /*
   TASK 6
@@ -233,7 +233,16 @@ class ProjectManager extends Instructor {
     return `${this.name} debugs ${student.name}'s code on ${subject}`
   }
 }
+const managerOne = new ProjectManager({
+  name: 'Kelly',
+  age: 30,
+})
 
+managerOne.gradeTwo(studentOne)
+console.log(studentOne.graduate())
+
+instructorOne.gradeTwo(studentOne)
+console.log(studentOne.graduate())
 /*
   STRETCH PROBLEM (no tests!)
     - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
